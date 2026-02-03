@@ -10,19 +10,19 @@ const server= http.createServer((req,res)=>{
 
   if(req.url === '/'){
     
-    const writebleStream = fs.createWriteStream(path.join(__dirname,'output.txt'))
+    const writebleStream = fs.createWriteStream(path.join(__dirname,'out.txt'))
      //  simple away-----------------------------------------------------------------
      //  readbleStream.pipe(writebleStream);
      
 
     // full control------------------------------------------------------------
+    const bufferArr = [];
      readbleStream.on ("data",(chunk)=>{
       console.log(chunk.toString())
       writebleStream.write(chunk)
      })
      readbleStream.on ("end",()=>{
       console.log("read end")
-      
      });
      
      res.setHeader('Content-Type','text/html')
