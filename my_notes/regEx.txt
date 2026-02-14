@@ -1,0 +1,99 @@
+
+const regEx = /^[a-z]{3,4}[\*]+[A-Z]{3,4}[0-9]+$/;
+console.log(regEx.test('sdss**SSS99'))
+
+^	string এর শুরু
+[a-z]{3,4}	ঠিক ৩ বা ৪টা ছোট হাতের অক্ষর
+[\*]+	এক বা একাধিক * চিহ্ন
+[A-Z]{3,4}	ঠিক ৩ বা ৪টা বড় হাতের অক্ষর
+[0-9]+	এক বা একাধিক সংখ্যা
+$	string এর শেষ
+
+
+
+১. জাভাস্ক্রিপ্টে রেগুলার এক্সপ্রেশন ব্যবহারের উপায়
+
+রেগুলার এক্সপ্রেশন (RegEx) মূলত স্ট্রিং মেথডগুলোর সঙ্গে বা RegExp অবজেক্ট মেথডের সঙ্গে ব্যবহার হয়।
+
+(A) স্ট্রিং মেথডে ব্যবহার
+
+স্ট্রিং মেথডগুলো সরাসরি রেগুলার এক্সপ্রেশন নিতে পারে।
+
+1.match()
+
+let str = "Hello123";
+let result = str.match(/\d+/); // /\d+/ হল RegEx
+console.log(result); // ["123"]
+
+
+RegEx দিয়ে ম্যাচ করলে মিলে যাওয়া অংশগুলো অ্যারে আকারে দেয়।
+
+2.replace()
+
+let str = "I have 2 apples";
+let newStr = str.replace(/\d+/, "five");
+console.log(newStr); // I have five apples
+
+
+কোনো প্যাটার্ন খুঁজে তা অন্য কিছু দিয়ে প্রতিস্থাপন করতে ব্যবহৃত হয়।
+
+3.search()
+
+let str = "Hello123";
+let index = str.search(/\d+/);
+console.log(index); // 5
+
+
+প্যাটার্নের প্রথম মিলের ইনডেক্স দেয়।
+
+3.split()
+
+let str = "apple,banana,orange";
+let arr = str.split(/,/);
+console.log(arr); // ["apple", "banana", "orange"]
+
+
+প্যাটার্ন অনুযায়ী স্ট্রিং ভাগ করে অ্যারে তৈরি করে।
+
+(B) RegExp অবজেক্ট মেথড
+RegEx অবজেক্ট তৈরি করে নিচের মেথড ব্যবহার করা যায়:
+
+4.test()
+
+let regex = /\d+/;
+console.log(regex.test("Hello123")); // true
+console.log(regex.test("Hello")); // false
+
+Boolean আউটপুট দেয়, ম্যাচ আছে কি না।
+
+
+5.exec()
+
+let regex = /\d+/;
+let result = regex.exec("Hello123");
+console.log(result); // ["123", index: 5, input: "Hello123", groups: undefined]
+
+
+ম্যাচের বিস্তারিত তথ্য সহ অ্যারে দেয়।
+
+
+6.matchAll()
+
+const str = "a1 b2 c3";
+const regex = /\w\d/g;
+const matches = str.matchAll(regex);
+
+for (const match of matches) {
+  console.log(match[0]); // a1, b2, c3
+}
+
+
+একাধিক ম্যাচের জন্য ব্যবহার হয়, প্রতিটি ম্যাচের বিস্তারিত info দেয়।
+
+match() 	  প্যাটার্নের মিল পাওয়া	                
+replace()	  মিল প্রতিস্থাপন	                  
+search()	  মিলের প্রথম ইনডেক্স	              
+split()	    প্যাটার্ন অনুযায়ী স্ট্রিং ভাগ	            
+test()	    Boolean আউটপুট (মিল আছে কি না)
+exec()	    মিলের বিস্তারিত তথ্য	                
+matchAll()	একাধিক ম্যাচের বিস্তারিত info	        
